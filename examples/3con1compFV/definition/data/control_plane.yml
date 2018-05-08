@@ -10,8 +10,12 @@ control-planes:
     - ntp-server
   - allocation-policy: strict
     cluster-prefix: c1
-    member-count: 1
+    member-count: 3
     name: cluster1
+    failure-zones:
+    - AZ1
+    - AZ2
+    - AZ3
     server-role: CONTROLLER-ROLE
     service-components:
     - tempest
