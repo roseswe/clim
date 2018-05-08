@@ -1,0 +1,47 @@
+network-groups:
+- component-endpoints:
+  - bind-ext
+  hostname-suffix: extapi
+  load-balancers:
+  - cert-file: my-public-entry-scale-kvm-cert
+    external-name: null
+    name: extlb
+    provider: ip-cluster
+    roles:
+    - public
+    tls-components:
+    - default
+  name: EXTERNAL-API
+- name: EXTERNAL-VM
+  tags:
+  - neutron.l3_agent.external_network_bridge
+- hostname-suffix: guest
+  name: GUEST
+  tags:
+  - neutron.networks.vxlan
+- component-endpoints:
+  - default
+  hostname: true
+  hostname-suffix: mgmt
+  load-balancers:
+  - cert-file: ardana-internal-cert
+    components:
+    - nova-metadata
+    name: lb
+    provider: ip-cluster
+    roles:
+    - internal
+    - admin
+    tls-components:
+    - default
+  name: MANAGEMENT
+  routes:
+  - default
+  - OCTAVIA-MGMT-NET
+  tags:
+  - neutron.networks.vlan:
+      provider-physical-network: physnet1
+  tls-component-endpoints:
+  - barbican-api
+product:
+  version: 2

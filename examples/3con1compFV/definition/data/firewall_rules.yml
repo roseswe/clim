@@ -1,0 +1,14 @@
+firewall-rules:
+- name: PING
+  network-groups:
+  - MANAGEMENT
+  - GUEST
+  - EXTERNAL-API
+  rules:
+  - port-range-max: 0
+    port-range-min: 8
+    protocol: icmp
+    remote-ip-prefix: 0.0.0.0/0
+    type: allow
+product:
+  version: 2

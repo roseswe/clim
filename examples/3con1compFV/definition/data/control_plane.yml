@@ -1,0 +1,120 @@
+control-planes:
+- clusters:
+  - allocation-policy: strict
+    cluster-prefix: c0
+    member-count: 1
+    name: c0
+    server-role: DEPLOYER-ROLE
+    service-components:
+    - lifecycle-manager
+    - ntp-server
+  - allocation-policy: strict
+    cluster-prefix: c1
+    member-count: 1
+    name: cluster1
+    server-role: CONTROLLER-ROLE
+    service-components:
+    - tempest
+    - ntp-server
+    - mysql
+    - ip-cluster
+    - apache2
+    - keystone-api
+    - keystone-client
+    - rabbitmq
+    - glance-api
+    - glance-registry
+    - glance-client
+    - cinder-api
+    - cinder-scheduler
+    - cinder-volume
+    - cinder-client
+    - nova-api
+    - nova-placement-api
+    - nova-scheduler
+    - nova-conductor
+    - nova-console-auth
+    - nova-novncproxy
+    - nova-client
+    - neutron-server
+    - neutron-ml2-plugin
+    - neutron-vpn-agent
+    - neutron-dhcp-agent
+    - neutron-metadata-agent
+    - neutron-openvswitch-agent
+    - neutron-client
+    - octavia-api
+    - octavia-health-manager
+    - horizon
+    - memcached
+    - heat-api
+    - heat-api-cfn
+    - heat-api-cloudwatch
+    - heat-engine
+    - heat-client
+    - openstack-client
+    - ceilometer-api
+    - ceilometer-polling
+    - ceilometer-agent-notification
+    - ceilometer-common
+    - ceilometer-client
+    - zookeeper
+    - kafka
+    - spark
+    - cassandra
+    - storm
+    - monasca-api
+    - monasca-persister
+    - monasca-notifier
+    - monasca-threshold
+    - monasca-client
+    - monasca-transform
+    - logging-server
+    - ops-console-web
+    - freezer-api
+    - barbican-api
+    - barbican-client
+    - barbican-worker
+    - designate-api
+    - designate-central
+    - designate-pool-manager
+    - designate-zone-manager
+    - designate-mdns
+    - designate-client
+    - bind
+    - magnum-api
+    - magnum-conductor
+  common-service-components:
+  - logging-rotate
+  - logging-producer
+  - monasca-agent
+  - freezer-agent
+  - stunnel
+  - lifecycle-manager-target
+  configuration-data:
+  - DESIGNATE-CONFIG-CP1
+  - OCTAVIA-CONFIG-CP1
+  - NEUTRON-CONFIG-CP1
+  control-plane-prefix: cp1
+  failure-zones:
+  - AZ1
+  - AZ2
+  - AZ3
+  name: control-plane-1
+  region-name: region1
+  resources:
+  - allocation-policy: any
+    min-count: 1
+    name: compute
+    resource-prefix: comp
+    server-role: COMPUTE-ROLE
+    service-components:
+    - ntp-client
+    - nova-compute
+    - nova-compute-kvm
+    - neutron-l3-agent
+    - neutron-metadata-agent
+    - neutron-openvswitch-agent
+    - neutron-lbaasv2-agent
+product:
+  version: 2

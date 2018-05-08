@@ -1,0 +1,27 @@
+cloud:
+  audit-settings:
+    audit-dir: /var/audit
+    default: disabled
+    disabled-services:
+    - nova
+    - barbican
+    - keystone
+    - cinder
+    - ceilometer
+    - neutron
+    - swift
+  dns-settings:
+    nameservers:
+    - 192.168.24.1
+  firewall-settings:
+    enable: true
+    logging: true
+  hostname-data:
+    host-prefix: ardana
+    member-prefix: -m
+  name: entry-scale-kvm
+  ntp-servers:
+  - 192.168.24.1
+  smtp-settings: null
+product:
+  version: 2

@@ -1,0 +1,24 @@
+disk-models:
+- name: DEPLOYER-600GB-DISKS
+  volume-groups:
+  - logical-volumes:
+    - fstype: ext4
+      mount: /
+      name: root
+      size: 30%
+    - fstype: ext4
+      mkfs-opts: -O large_file
+      mount: /var/log
+      name: log
+      size: 10%
+    - fstype: ext4
+      mkfs-opts: -O large_file
+      mount: /var/crash
+      name: crash
+      size: 10%
+    name: ardana-vg
+    physical-volumes:
+    - /dev/vda_root
+
+product:
+  version: 2

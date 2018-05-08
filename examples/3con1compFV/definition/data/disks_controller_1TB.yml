@@ -1,0 +1,81 @@
+disk-models:
+- device-groups:
+  - consumer:
+      attrs:
+        rings:
+        - account
+        - container
+        - object-0
+      name: swift
+    devices:
+    - name: /dev/sdb
+    - name: /dev/sdc
+    name: swiftobj
+  name: CONTROLLER-1TB-DISKS
+  volume-groups:
+  - consumer:
+      name: os
+    logical-volumes:
+    - fstype: ext4
+      mount: /
+      name: root
+      size: 6%
+    - fstype: ext4
+      mkfs-opts: -O large_file
+      mount: /var/crash
+      name: crash
+      size: 6%
+    - fstype: ext4
+      mkfs-opts: -O large_file
+      mount: /var/log
+      name: log
+      size: 15%
+    - consumer:
+        name: mysql
+      fstype: ext4
+      mkfs-opts: -O large_file
+      mount: /var/lib/mysql
+      name: mysql
+      size: 6%
+    - consumer:
+        name: rabbitmq
+        rabbitmq_env: home
+      fstype: ext4
+      mkfs-opts: -O large_file
+      mount: /var/lib/rabbitmq
+      name: rabbitmq
+      size: 7%
+    - consumer:
+        name: cassandra
+      fstype: ext4
+      mkfs-opts: -O large_file
+      mount: /var/cassandra/data
+      name: cassandra_db
+      size: 19%
+    - consumer:
+        name: cassandra
+      fstype: ext4
+      mkfs-opts: -O large_file
+      mount: /var/cassandra/commitlog
+      name: cassandra_log
+      size: 1%
+    - consumer:
+        name: kafka
+      fstype: ext4
+      mkfs-opts: -O large_file
+      mount: /var/kafka
+      name: kafka
+      size: 7%
+    - fstype: ext4
+      mount: /var/lib/elasticsearch
+      name: elasticsearch
+      size: 13%
+    - fstype: ext4
+      mount: /var/lib/zookeeper
+      name: zookeeper
+      size: 1%
+    name: ardana-vg
+    physical-volumes:
+    - /dev/sda_root
+product:
+  version: 2

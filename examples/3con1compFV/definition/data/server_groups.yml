@@ -1,0 +1,25 @@
+product:
+  version: 2
+server-groups:
+- name: CLOUD
+  networks:
+  - EXTERNAL-API-NET
+  - EXTERNAL-VM-NET
+  - GUEST-NET
+  - MANAGEMENT-NET
+  server-groups:
+  - AZ1
+  - AZ2
+  - AZ3
+- name: AZ1
+  server-groups:
+  - RACK1
+- name: AZ2
+  server-groups:
+  - RACK2
+- name: AZ3
+  server-groups:
+  - RACK3
+- name: RACK1
+- name: RACK2
+- name: RACK3

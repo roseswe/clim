@@ -1,0 +1,12 @@
+product:
+  version: 2
+server-roles:
+- disk-model: CONTROLLER-600GB-DISKS
+  interface-model: CONTROLLER-INTERFACES
+  name: CONTROLLER-ROLE
+- disk-model: COMPUTE-600GB-DISKS
+  interface-model: COMPUTE-INTERFACES
+  name: COMPUTE-ROLE
+- disk-model: DEPLOYER-600GB-DISKS
+  interface-model: DEPLOYER-INTERFACES
+  name: DEPLOYER-ROLE

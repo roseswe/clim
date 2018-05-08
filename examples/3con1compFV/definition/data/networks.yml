@@ -1,0 +1,27 @@
+networks:
+- addresses:
+  - 192.168.26.10-192.168.26.99
+  cidr: 192.168.26.0/24
+  gateway-ip: 192.168.26.1
+  name: EXTERNAL-API-NET
+  network-group: EXTERNAL-API
+  tagged-vlan: true
+  vlanid: 26
+- name: EXTERNAL-VM-NET
+  network-group: EXTERNAL-VM
+  tagged-vlan: true
+  vlanid: 27
+- cidr: 10.1.1.0/24
+  gateway-ip: 10.1.1.1
+  name: GUEST-NET
+  network-group: GUEST
+  tagged-vlan: true
+  vlanid: 103
+- cidr: 192.168.124.0/24
+  gateway-ip: 192.168.124.1
+  name: MANAGEMENT-NET
+  network-group: MANAGEMENT
+  tagged-vlan: false
+  vlanid: 100
+product:
+  version: 2

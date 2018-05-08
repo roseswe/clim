@@ -1,0 +1,39 @@
+interface-models:
+- name: DEPLOYER-INTERFACES
+  network-interfaces:
+  - device:
+      name: hed1
+    name: intf1
+    network-groups:
+    - MANAGEMENT
+
+- name: COMPUTE-INTERFACES
+  network-interfaces:
+  - device:
+      name: hed1
+    name: intf1
+    network-groups:
+    - MANAGEMENT
+  - device:
+      name: hed2
+    name: intf2
+    network-groups:
+    - EXTERNAL-API
+    - EXTERNAL-VM
+    - GUEST
+- name: CONTROLLER-INTERFACES
+  network-interfaces:
+  - device:
+      name: hed1
+    name: intf1
+    network-groups:
+    - MANAGEMENT
+  - device:
+      name: hed2
+    name: intf2
+    network-groups:
+    - EXTERNAL-API
+    - EXTERNAL-VM
+    - GUEST
+product:
+  version: 2

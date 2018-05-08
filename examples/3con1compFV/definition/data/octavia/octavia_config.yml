@@ -1,0 +1,8 @@
+configuration-data:
+- data:
+    amp_network_name: OCTAVIA-MGMT-NET
+  name: OCTAVIA-CONFIG-CP1
+  services:
+  - octavia
+product:
+  version: 2

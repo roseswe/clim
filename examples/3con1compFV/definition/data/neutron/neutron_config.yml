@@ -1,0 +1,22 @@
+configuration-data:
+- data:
+    neutron_provider_networks:
+    - allocation_pools:
+      - end: 172.30.1.250
+        start: 172.30.1.10
+      cidr: 172.30.1.0/24
+      enable_dhcp: true
+      host_routes:
+      - destination: 192.168.124.0/24
+        nexthop: 172.30.1.1
+      name: OCTAVIA-MGMT-NET
+      no_gateway: true
+      provider:
+      - network_type: vlan
+        physical_network: physnet1
+        segmentation_id: 106
+  name: NEUTRON-CONFIG-CP1
+  services:
+  - neutron
+product:
+  version: 2
