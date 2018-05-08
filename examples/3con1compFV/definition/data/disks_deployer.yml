@@ -16,7 +16,7 @@ disk-models:
       mount: /var/crash
       name: crash
       size: 10%
-    name: ardana-vg
+    name: system
     physical-volumes:
     - /dev/vda_root
 

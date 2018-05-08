@@ -1,5 +1,5 @@
 disk-models:
-- name: CONTROLLER-600GB-DISKS
+- name: COMPUTE-600GB-DISKS
   volume-groups:
   - logical-volumes:
     - fstype: ext4
@@ -21,7 +21,7 @@ disk-models:
       mount: /var/lib/nova
       name: compute
       size: 50%
-    name: ardana-vg
+    name: system
     physical-volumes:
     - /dev/vda_root
 
