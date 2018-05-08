@@ -1,0 +1,8 @@
+
+push_token="<TOKEN>"
+push_user="<USER>"
+push_msg="CLIM has finished"
+push_device="<DEVICE>"
+push_title="Operator: DEMO"
+push_URL="https://api.pushover.net/1/messages.json"
+
