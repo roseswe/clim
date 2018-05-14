@@ -2,6 +2,7 @@
 
 The doku directory contains some information about "how to setup SOC8" for a test in a full virtualized environemnt. This is still WIP - at the moment, I try to deploy SOC8 in one big VM with 128GB RAM - running on Azure....
 
+# CLIM 
 ```
 # clim <OPTIONS> <COMMAND>
 
