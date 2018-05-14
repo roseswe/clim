@@ -29,6 +29,13 @@ As I don’t want to use cobbler for the bare-metal installation, we need some p
 ### 3. Repository Server:
 I use my host as the Repos-Server and provide the needed repos to the VM’s via a local apache Server. The repos are synced from an external SMT server.
 
+I run into an error during the first site deploy - the PTF repo has an unsigned meta info:
+
+From the release notes:
+```
+ansible -m shell -a "sudo zypper -n --gpg-auto-import-keys ref -f PTF" list-of-new-nodes
+``` 
+
 For the basic setup, you need 5 virtual machines:
 
 1 x Deployer Node (VM:  2GB RAM, 2 CPU’s, 2 NIC, 1x disk)
