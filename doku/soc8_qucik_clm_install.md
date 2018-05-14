@@ -6,7 +6,7 @@ SOC8 is using cobbler to install the cloud nodes and relay on IPMI to control th
 
 This document is based on a opensuse42.3 host (Dell SE laptop) and is using KVM as hypervisor.
 
-![](kvm_host_setup.png )
+![setup](kvm_host_setup.png )
 
 ## Preparation:
 
