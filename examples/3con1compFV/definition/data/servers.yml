@@ -26,12 +26,12 @@ servers:
   ip-addr: 192.168.124.101
   nic-mapping: CONTROL
   role: CONTROLLER-ROLE
-  server-group: AZ1
+  server-group: AZ2
   uid: manual_59542A10217A4BAD253C47C4C04D8822
 - id: control3
   ip-addr: 192.168.124.102
   nic-mapping: CONTROL
   role: CONTROLLER-ROLE
-  server-group: AZ1
+  server-group: AZ3
   uid: manual_59542A10217A4BAD253C47C4C04D8822
 
