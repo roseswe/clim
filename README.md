@@ -1,7 +1,10 @@
 # SOC 8 CLM Quick Start Guide
 
+The doku directory contains some information about "how to setup SOC8" for a test in a full virtualized environemnt. This is still WIP - at the moment, I try to deploy SOC8 in one big VM with 128GB RAM - running on Azure....
 
-# clim
+# CLIM 
+```
+# clim <OPTIONS> <COMMAND>
 
 wrapper script for using SUSE Cloud 8
 
