@@ -2,24 +2,36 @@
 set +x
 source ~/.clim
 OPTINT=1
-clear=""
+options=""
 verbose=0
 notify=0
 
-while getopts "ch?n" opt; do
+while getopts "ch?no:l:" opt; do
    case "$opt" in
    h|\?)
      cat <<EOF
 HELP:
-  -c run config-processor with option "-e remove_deleted_servers=True -e free_unused_addresses=True"
-  -n notify via pushover
+  -c                                   :run config-processor with option "-e remove_deleted_servers=True -e free_unused_addresses=True"
+  -o "<OPTIONS>"                       :add <OPTIONS> to the end of the ansoble-playbook call
+  -l "<RESOURCE>"                      :if the service command is used, limit the execution to the resource <RESOURCE>
+  -n notify via pushover	       : Pushover is a service to push notifications to a mobile (other clients are possible). The credentials for the service
+                                         have to be configured in ~/.clim  
 
 COMMANDS
-  prepare "MESSAGE": commits the config changes, run the config-processor and run the ready-deployment if the config is valid
-  site             : deploys the config to the nodes via the site.yml playbook
-  status	   : checks the status of the services
-  stop		   : shutdown the openstack services
-  start		   : start the openstack services
+  prepare "MESSAGE"                    : commits the config changes, run the config-processor and run the ready-deployment if the config is valid
+  site                                 : deploys the config to the nodes via the site.yml playbook
+  status	                       : checks the status of the services
+  stop		                       : shutdown the openstack services
+  start		                       : start the openstack services
+  service <OPENSTACK-SERVICE> <ACTION> : runs the ansible playbook to execute <ACTION> on the service <OPENSTACK>
+                                         e.x.: "clim service neutron restart"
+  service list                         : list all services
+  setup_basrc	                       : crates a .bashrc file and setup variables which can be used as a shortcut for jumping in the correct directory:
+                                          - $def=~/openstack/my_cloud/definition
+                                          - $data=~/openstack/my_cloud/definition/data
+                                          - $scratch=~/scratch/ansible/next/ardana/ansible
+                                            to jump into the DATA directory of the input model, just run "cd $data"
+
 EOF
      exit 0
    ;;
@@ -27,8 +39,16 @@ EOF
      verbose=1
    ;;
    c) 
-     clear="-e ..."
+     options="-e remove_deleted_servers=True -e free_unused_addresses=True"
    ;;
+   o)
+     options="$options $OPTARG"
+   ;;
+   l)
+     options="$options --limit $OPTARG"
+   ;;
+
+
    n)
      notify=1
    ;;
@@ -51,7 +71,7 @@ case "$1" in
           fi
           git add -A
 	  git commit -m "$2"
-          ansible-playbook -i hosts/localhost config-processor-run.yml 
+          ansible-playbook -i hosts/localhost config-processor-run.yml $options
           if [ $? -ne 0 ]
                 then
                  echo ### ERROR: config-processor is not happy
@@ -85,11 +105,43 @@ case "$1" in
           ansible-playbook -i hosts/verb_hosts ardana-status.yml
           ;;
 
-        test)
-          echo Hallo
-          echo $clear
+        service)
+          if [ "$2" == "list" ]
+	       then
+               echo "SERVICES:"
+	       cd  ~/scratch/ansible/next/ardana/ansible
+                ls *.yml | grep '^[a-z]' | grep "start\|stop\|restart\|status" | cut -d "-" -f 1 | sort -u
+          else
+          if [ -z "$2" ] || [ -z "$3" ] 
+		then
+		 echo "clim service <SERVICENAME> <ACTION>"
+		 exit
+          fi
+          acmd="${2}-${3}.yml"
+          cd ~/scratch/ansible/next/ardana/ansible
+          if [ ! -f /var/lib/ardana/scratch/ansible/next/ardana/ansible/$acmd ]
+	     then
+               echo "service and/or action not found - no valid ansible playbook found"
+               exit 5
+             fi
+          ansible-playbook -i hosts/verb_hosts $acmd $options
+          fi
           ;;
 
+
+        test)
+          echo Hallo
+          echo DEBUG: $options $2 $3
+          ;;
+
+        setup_bashrc)
+	  cat <<EOF >> /var/lib/ardana/.bashrc
+# added by clim
+export def=~/openstack/my_cloud/definition
+export data=~/openstack/my_cloud/definition/data
+export scratch=~/scratch/ansible/next/ardana/ansible 
+EOF
+	  ;;
    	*)
           echo $"Usage: $0 cd_myconfig " 
 	  exit 1
