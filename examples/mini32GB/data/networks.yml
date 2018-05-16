@@ -35,10 +35,10 @@
     # Modify these values to match your environment
     #
     - name: EXTERNAL-API-NET
-      vlanid: 101
+      vlanid: 300
       tagged-vlan: true
-      cidr: 10.0.1.0/24
-      gateway-ip: 10.0.1.1
+      cidr: 192.168.126.0/24
+      gateway-ip: 192.168.126.1
       network-group: EXTERNAL-API
       #addresses:
       #  - 10.0.1.10-10.0.1.250
@@ -49,17 +49,17 @@
       network-group: EXTERNAL-VM
 
     - name: GUEST-NET
-      vlanid: 103
+      vlanid: 700
       tagged-vlan: true
-      cidr: 10.1.1.0/24
-      gateway-ip: 10.1.1.1
+      cidr: 192.168.130.0/24
+      gateway-ip: 192.168.130.1
       network-group: GUEST
 
     - name: MANAGEMENT-NET
       vlanid: 100
       tagged-vlan: false
-      cidr: 192.168.110.0/24
-      gateway-ip: 192.168.110.1
+      cidr: 192.168.124.0/24
+      gateway-ip: 192.168.124.1
       network-group: MANAGEMENT
       #addresses:
       #  - 192.168.110.1-192.168.110.250

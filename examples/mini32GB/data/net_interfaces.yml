@@ -15,51 +15,35 @@
 # under the License.
 #
 ---
-  product:
-    version: 2
+interface-models:
+- name: COMPUTE-INTERFACES
+  network-interfaces:
+  - device:
+      name: hed1
+    name: intf1
+    network-groups:
+    - MANAGEMENT
+  - device:
+      name: hed2
+    name: intf2
+    network-groups:
+    - EXTERNAL-API
+    - EXTERNAL-VM
+    - GUEST
+- name: CONTROLLER-INTERFACES
+  network-interfaces:
+  - device:
+      name: hed1
+    name: intf1
+    network-groups:
+    - MANAGEMENT
+  - device:
+      name: hed2
+    name: intf2
+    network-groups:
+    - EXTERNAL-API
+    - EXTERNAL-VM
+    - GUEST
+product:
+  version: 2
 
-  interface-models:
-      # These examples uses hed3 and hed4 as a bonded
-      # pair for all networks on all three server roles
-      #
-      # Edit the device names and bond options
-      # to match your environment
-      #
-    - name: CONTROLLER-INTERFACES
-      network-interfaces:
-        - name: BOND0
-          device:
-              name: bond0
-          bond-data:
-              options:
-                  mode: active-backup
-                  miimon: 200
-                  primary: hed3
-              provider: linux
-              devices:
-                - name: hed3
-                - name: hed4
-          network-groups:
-            - EXTERNAL-API
-            - EXTERNAL-VM
-            - GUEST
-            - MANAGEMENT
-
-    - name: COMPUTE-INTERFACES
-      network-interfaces:
-        - name: BOND0
-          device:
-              name: bond0
-          bond-data:
-              options:
-                  mode: active-backup
-                  miimon: 200
-                  primary: hed3
-              provider: linux
-              devices:
-                - name: hed3
-                - name: hed4
-          network-groups:
-            - EXTERNAL-VM
-            - GUEST
-            - MANAGEMENT

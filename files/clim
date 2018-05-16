@@ -1,6 +1,6 @@
 #!/bin/bash
 set +x
-source ~/.clim
+test -f ~/.clim && source ~/.clim
 OPTINT=1
 options=""
 verbose=0

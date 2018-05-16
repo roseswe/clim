@@ -22,7 +22,7 @@
     # NOTE: These values need to be changed to match your environment.
     # Define the network range that contains the ip-addr values for
     # the individual servers listed below.
-    subnet: 192.168.110.0
+    subnet: 192.168.124.0
     netmask: 255.255.255.0
 
   servers:
@@ -33,41 +33,22 @@
 
     # Controllers
     - id: controller1
-      ip-addr: 192.168.110.3
+      ip-addr: 192.168.124.10
       role: CONTROLLER-ROLE
       server-group: RACK1
-      nic-mapping: HP-DL360-4PORT
+      nic-mapping: KVM
       mac-addr: "b2:72:8d:ac:7c:6f"
       ilo-ip: 192.168.109.3
       ilo-password: password
       ilo-user: admin
 
-    - id: controller2
-      ip-addr: 192.168.110.4
-      role: CONTROLLER-ROLE
-      server-group: RACK2
-      nic-mapping: HP-DL360-4PORT
-      mac-addr: "8a:8e:64:55:43:76"
-      ilo-ip: 192.168.109.4
-      ilo-password: password
-      ilo-user: admin
-
-    - id: controller3
-      ip-addr: 192.168.110.5
-      role: CONTROLLER-ROLE
-      server-group: RACK3
-      nic-mapping: HP-DL360-4PORT
-      mac-addr: "26:67:3e:49:5a:a7"
-      ilo-ip: 192.168.109.5
-      ilo-password: password
-      ilo-user: admin
 
     # Compute Nodes
     - id: compute1
-      ip-addr: 192.168.110.6
+      ip-addr: 192.168.124.82
       role: COMPUTE-ROLE
       server-group: RACK1
-      nic-mapping: MY-2PORT-SERVER
+      nic-mapping: KVM
       mac-addr: "d6:70:c1:36:43:f7"
       ilo-ip: 192.168.109.6
       ilo-password: password

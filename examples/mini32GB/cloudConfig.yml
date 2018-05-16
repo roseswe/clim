@@ -19,7 +19,7 @@
     version: 2
 
   cloud:
-    name: entry-scale-kvm
+    name: mini32G
 
     # The following values are used when
     # building hostnames
@@ -29,14 +29,15 @@
 
     # List of ntp servers for your site
     ntp-servers:
+    - 192.168.124.1
     #    - "ntp-server1"
     #    - "ntp-server2"
 
     # dns resolving configuration for your site
     # refer to resolv.conf for details on each option
     dns-settings:
-    #  nameservers:
-    #    - name-server1
+      nameservers:
+        - 192.168.124.1
     #    - name-server2
     #    - name-server3
     #
