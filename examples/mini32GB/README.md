@@ -15,15 +15,15 @@ License for the specific language governing permissions and limitations
 under the License.
 -->
 
-## Entry Scale KVM Cloud
+## mini32GB
 
-This example input model deploys an entry scale cloud with KVM Hypervisor.
+This example input model deploys an minimal OpenStack Installation.
 
 ### Control Plane
 
-- Cluster1: 3 nodes of type CONTROLLER-ROLE run the core OpenStack
+- Cluster1: 1 node of type CONTROLLER-ROLE run the core OpenStack
   services such as Keystone, Nova, Glance, Neutron, Horizon, Heat,
-  Ceilometer, block storage, and object storage.
+  Ceilometer, block storage
 
 ### Lifecycle Manager
 
@@ -36,7 +36,6 @@ This example input model deploys an entry scale cloud with KVM Hypervisor.
 - Compute: One node of type COMPUTE-ROLE runs nova-compute and other
   supporting services.
 
-- Object Storage: Minimal Swift resources are provided by the control plane.
 
   *Additional resource nodes can be added to the configuration.*
 
@@ -66,21 +65,7 @@ network for VMs to be able to make API calls to the cloud.
 An example set of networks is defined in `data/networks.yml`.
 The file needs to be modified to reflect your environment.
 
-The example uses the devices `hed3` & `hed4` as a bonded network interface
-for all services. The name given to a network interface by the system is
-configured in the file `data/net_interfaces.yml`. That file needs to be edited
-to match your system.
-
 ### Local Storage
 
 All servers should present a single OS disk, protected by a RAID controller.
-This disk needs to be at least 512GB.   In addition the example configures one
-additional disk depending on the role of the server:
-
-- Controllers:  `/dev/sdb` is configured to be used by Swift
-
-- Compute Servers:  `/dev/sdb` is configured as an additional Volume Group to be
-  used for VM storage
-
-Additional disks can be configured for any of these roles by editing
-the corresponding `data/disks_*.yml` file
+This disk needs to be at least 100GB. 
