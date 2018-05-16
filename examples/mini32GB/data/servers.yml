@@ -33,7 +33,7 @@
 
     # Controllers
     - id: controller1
-      ip-addr: 192.168.124.10
+      ip-addr: 192.168.124.100
       role: CONTROLLER-ROLE
       server-group: RACK1
       nic-mapping: KVM
@@ -45,7 +45,7 @@
 
     # Compute Nodes
     - id: compute1
-      ip-addr: 192.168.124.82
+      ip-addr: 192.168.124.110
       role: COMPUTE-ROLE
       server-group: RACK1
       nic-mapping: KVM

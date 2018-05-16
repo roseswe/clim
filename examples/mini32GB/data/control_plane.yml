@@ -28,9 +28,6 @@
       configuration-data:
         - NEUTRON-CONFIG-CP1
       common-service-components:
-        - logging-rotate
-        - logging-producer
-        - freezer-agent
         - stunnel
         - lifecycle-manager-target
       clusters:
@@ -49,7 +46,10 @@
             - keystone-api
             - keystone-client
             - rabbitmq
-            - glance-api
+            - glance-api:
+                ha_mode: false
+                glance_stores: 'file'
+                glance_default_store: 'file'
             - glance-registry
             - glance-client
             - cinder-api
@@ -78,8 +78,6 @@
             - heat-engine
             - heat-client
             - openstack-client
-            - logging-server
-            - bind
 
       resources:
         - name: compute

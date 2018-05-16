@@ -93,4 +93,3 @@
          - cinder
          - ceilometer
          - neutron
-         - swift
