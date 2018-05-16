@@ -1,0 +1,60 @@
+EXTERNAL-API:
+    EXTERNAL-API-NET:
+        192.168.126.2:
+        - ardana-cp1-c1-m1-extapi
+        192.168.126.3:
+        - ardana-cp1-vip-public-ARD-SVC-extapi
+        - ardana-cp1-vip-public-CND-API-extapi
+        - ardana-cp1-vip-public-GLA-API-extapi
+        - ardana-cp1-vip-public-HEA-ACF-extapi
+        - ardana-cp1-vip-public-HEA-ACW-extapi
+        - ardana-cp1-vip-public-HEA-API-extapi
+        - ardana-cp1-vip-public-HZN-WEB-extapi
+        - ardana-cp1-vip-public-KEY-API-extapi
+        - ardana-cp1-vip-public-NEU-SVR-extapi
+        - ardana-cp1-vip-public-NOV-API-extapi
+        - ardana-cp1-vip-public-NOV-PLC-extapi
+        - ardana-cp1-vip-public-NOV-VNC-extapi
+EXTERNAL-VM:
+    EXTERNAL-VM-NET: {}
+GUEST:
+    GUEST-NET:
+        192.168.130.2:
+        - ardana-cp1-c1-m1-guest
+        192.168.130.3:
+        - ardana-cp1-comp0001-guest
+MANAGEMENT:
+    MANAGEMENT-NET:
+        192.168.124.100:
+        - ardana-cp1-c1-m1-mgmt
+        192.168.124.110:
+        - ardana-cp1-comp0001-mgmt
+        192.168.124.2:
+        - ardana-cp1-vip-ARD-SVC-mgmt
+        - ardana-cp1-vip-CND-API-mgmt
+        - ardana-cp1-vip-FND-MDB-mgmt
+        - ardana-cp1-vip-GLA-API-mgmt
+        - ardana-cp1-vip-GLA-REG-mgmt
+        - ardana-cp1-vip-HEA-ACF-mgmt
+        - ardana-cp1-vip-HEA-ACW-mgmt
+        - ardana-cp1-vip-HEA-API-mgmt
+        - ardana-cp1-vip-HZN-WEB-mgmt
+        - ardana-cp1-vip-KEY-API-mgmt
+        - ardana-cp1-vip-NEU-SVR-mgmt
+        - ardana-cp1-vip-NOV-API-mgmt
+        - ardana-cp1-vip-NOV-MTD-mgmt
+        - ardana-cp1-vip-NOV-PLC-mgmt
+        - ardana-cp1-vip-admin-ARD-SVC-mgmt
+        - ardana-cp1-vip-admin-CND-API-mgmt
+        - ardana-cp1-vip-admin-FND-MDB-mgmt
+        - ardana-cp1-vip-admin-GLA-API-mgmt
+        - ardana-cp1-vip-admin-HEA-ACF-mgmt
+        - ardana-cp1-vip-admin-HEA-ACW-mgmt
+        - ardana-cp1-vip-admin-HEA-API-mgmt
+        - ardana-cp1-vip-admin-HZN-WEB-mgmt
+        - ardana-cp1-vip-admin-KEY-API-mgmt
+        - ardana-cp1-vip-admin-NEU-SVR-mgmt
+        - ardana-cp1-vip-admin-NOV-API-mgmt
+        - ardana-cp1-vip-admin-NOV-PLC-mgmt
+OCTAVIA-MGMT-NET:
+    OCTAVIA-MGMT-NET: {}

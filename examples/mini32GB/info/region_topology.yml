@@ -1,0 +1,64 @@
+regions:
+    region1:
+        control_planes:
+            control-plane-1:
+                services:
+                    ardana:
+                    - lifecycle-manager-target
+                    - lifecycle-manager
+                    - ardana-service
+                    cinder:
+                    - cinder-api
+                    - cinder-volume
+                    - cinder-scheduler
+                    clients:
+                    - cinder-client
+                    - heat-client
+                    - openstack-client
+                    - neutron-client
+                    - glance-client
+                    - keystone-client
+                    - nova-client
+                    foundation:
+                    - ip-cluster
+                    - ntp-client
+                    - ardana-ca
+                    - stunnel
+                    - apache2
+                    - ntp-server
+                    - rabbitmq
+                    - mysql
+                    - memcached
+                    glance:
+                    - glance-api
+                    - glance-registry
+                    heat:
+                    - heat-api-cfn
+                    - heat-engine
+                    - heat-api
+                    - heat-api-cloudwatch
+                    horizon:
+                    - horizon
+                    keystone:
+                    - keystone-api
+                    neutron:
+                    - neutron-ml2-plugin
+                    - neutron-server
+                    - neutron-openvswitch-agent
+                    - neutron-metadata-agent
+                    - neutron-lbaasv2-agent
+                    - neutron-dhcp-agent
+                    - neutron-vpn-agent
+                    - neutron-l3-agent
+                    nova:
+                    - nova-console-auth
+                    - nova-novncproxy
+                    - nova-compute
+                    - nova-conductor
+                    - nova-api
+                    - nova-scheduler
+                    - nova-placement-api
+                    - nova-metadata
+                    - nova-compute-kvm
+                    tempest:
+                    - tempest

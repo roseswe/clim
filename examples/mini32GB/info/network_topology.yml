@@ -1,0 +1,52 @@
+network_groups:
+    EXTERNAL-API:
+        EXTERNAL-API-NET:
+            control_planes:
+                control-plane-1:
+                    clusters:
+                        cluster1:
+                            servers:
+                                ardana-cp1-c1-m1: 192.168.126.2
+                            vips:
+                                192.168.126.3: extlb
+    EXTERNAL-VM:
+        EXTERNAL-VM-NET:
+            control_planes:
+                control-plane-1:
+                    clusters:
+                        cluster1:
+                            servers:
+                                ardana-cp1-c1-m1: null
+                    resources:
+                        compute:
+                            servers:
+                                ardana-cp1-comp0001: null
+    GUEST:
+        GUEST-NET:
+            control_planes:
+                control-plane-1:
+                    clusters:
+                        cluster1:
+                            servers:
+                                ardana-cp1-c1-m1: 192.168.130.2
+                    resources:
+                        compute:
+                            servers:
+                                ardana-cp1-comp0001: 192.168.130.3
+    MANAGEMENT:
+        MANAGEMENT-NET:
+            control_planes:
+                control-plane-1:
+                    clusters:
+                        cluster1:
+                            servers:
+                                ardana-cp1-c1-m1: 192.168.124.100
+                            vips:
+                                192.168.124.2: lb
+                    resources:
+                        compute:
+                            servers:
+                                ardana-cp1-comp0001: 192.168.124.110
+    OCTAVIA-MGMT-NET:
+        OCTAVIA-MGMT-NET:
+            control_planes: {}
