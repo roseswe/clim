@@ -127,8 +127,24 @@ case "$1" in
           ansible-playbook -i hosts/verb_hosts $acmd $options
           fi
           ;;
-
-
+        cobbler-deploy)
+              cd ~/openstack/ardana/ansible
+              ansible-playbook -i hosts/localhost cobbler-deploy.yml
+	;;
+        
+        prepare-sles-grub2)
+              cd ~/openstack/ardana/ansible
+              ansible-playbook -i hosts/localhost prepare-sles-grub2.yml
+	;;
+        bm-reimage)
+	      cd ~/openstack/ardana/ansible
+              nodes=""
+              if [ ! -z $2 ]
+                  then
+                   nodes="-e nodelist=$2"
+	      fi 
+              ansible-playbook -i hosts/localhost bm-reimage.yml $nodes
+	 ;;
         test)
           echo Hallo
           echo DEBUG: $options $2 $3

@@ -56,6 +56,7 @@
             - cinder-scheduler
             - cinder-volume
             - cinder-client
+            - cinder-backup
             - nova-api
             - nova-placement-api
             - nova-scheduler

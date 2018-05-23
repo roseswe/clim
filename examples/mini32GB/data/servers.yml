@@ -37,9 +37,9 @@
       role: CONTROLLER-ROLE
       server-group: RACK1
       nic-mapping: KVM
-      mac-addr: "b2:72:8d:ac:7c:6f"
-      ilo-ip: 192.168.109.3
-      ilo-password: password
+      mac-addr: "52:54:00:a0:ab:d8"
+      ilo-ip: 192.168.124.210
+      ilo-password: admin
       ilo-user: admin
 
 
@@ -49,7 +49,18 @@
       role: COMPUTE-ROLE
       server-group: RACK1
       nic-mapping: KVM
-      mac-addr: "d6:70:c1:36:43:f7"
-      ilo-ip: 192.168.109.6
-      ilo-password: password
+      mac-addr: "52:54:00:f3:3b:46"
+      ilo-ip: 192.168.124.211
+      ilo-password: admin
       ilo-user: admin
+
+    - id: compute2
+      ip-addr: 192.168.124.111
+      role: COMPUTE-ROLE
+      server-group: RACK2
+      nic-mapping: KVM
+      mac-addr: "52:54:00:5d:4c:5e"
+      ilo-ip: 192.168.124.212
+      ilo-password: admin
+      ilo-user: admin
+
