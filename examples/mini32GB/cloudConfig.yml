@@ -29,7 +29,7 @@
 
     # List of ntp servers for your site
     ntp-servers:
-    - 192.168.124.1
+    - 192.168.124.5
     #    - "ntp-server1"
     #    - "ntp-server2"
 
@@ -37,7 +37,7 @@
     # refer to resolv.conf for details on each option
     dns-settings:
       nameservers:
-        - 192.168.124.1
+        - 192.168.124.5
     #    - name-server2
     #    - name-server3
     #

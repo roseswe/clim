@@ -25,6 +25,7 @@
       failure-zones:
         - AZ1
         - AZ2
+        - AZ3
       configuration-data:
         - NEUTRON-CONFIG-CP1
       common-service-components:

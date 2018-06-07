@@ -40,8 +40,8 @@
       cidr: 192.168.126.0/24
       gateway-ip: 192.168.126.1
       network-group: EXTERNAL-API
-      #addresses:
-      #  - 10.0.1.10-10.0.1.250
+      addresses:
+        - 192.168.126.10-192.168.126.199
 
     - name: EXTERNAL-VM-NET
       vlanid: 102
@@ -59,7 +59,7 @@
       vlanid: 100
       tagged-vlan: false
       cidr: 192.168.124.0/24
-      gateway-ip: 192.168.124.1
+      gateway-ip: 192.168.124.2
       network-group: MANAGEMENT
-      #addresses:
-      #  - 192.168.110.1-192.168.110.250
+      addresses:
+        - 192.168.124.10-192.168.124.199

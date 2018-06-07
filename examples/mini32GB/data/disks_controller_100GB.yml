@@ -41,7 +41,7 @@
           # NOTE: 'sda_root' is a templated value. This value is checked in
           # os-config and replaced by the partition actually used on sda
           #e.g. sda1 or sda5
-          - /dev/vda_root
+          - /dev/sda_root
 
           # Add any additional disks for the volume group here
           # -/dev/sdx

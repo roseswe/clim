@@ -31,7 +31,7 @@
     volume-groups:
       - name: system
         physical-volumes:
-         - /dev/vda_root
+         - /dev/sda_root
 
         logical-volumes:
         # The policy is not to consume 100% of the space of each volume group.

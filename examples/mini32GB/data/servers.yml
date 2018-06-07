@@ -33,7 +33,7 @@
 
     # Controllers
     - id: controller1
-      ip-addr: 192.168.124.100
+      ip-addr: 192.168.124.101
       role: CONTROLLER-ROLE
       server-group: RACK1
       nic-mapping: KVM
@@ -41,6 +41,27 @@
       ilo-ip: 192.168.124.210
       ilo-password: admin
       ilo-user: admin
+
+#    - id: controller2
+#      ip-addr: 192.168.124.102
+#      role: CONTROLLER-ROLE
+#      server-group: RACK2
+#      nic-mapping: KVM
+#      mac-addr: "52:54:00:a0:ab:d8"
+#      ilo-ip: 192.168.124.210
+#      ilo-password: admin
+#      ilo-user: admin
+#
+#    - id: controller3
+#      ip-addr: 192.168.124.103
+#      role: CONTROLLER-ROLE
+#      server-group: RACK3
+#      nic-mapping: KVM
+#      mac-addr: "52:54:00:a0:ab:d8"
+#      ilo-ip: 192.168.124.210
+#      ilo-password: admin
+#      ilo-user: admin
+
 
 
     # Compute Nodes
@@ -54,13 +75,13 @@
       ilo-password: admin
       ilo-user: admin
 
-    - id: compute2
-      ip-addr: 192.168.124.111
-      role: COMPUTE-ROLE
-      server-group: RACK2
-      nic-mapping: KVM
-      mac-addr: "52:54:00:5d:4c:5e"
-      ilo-ip: 192.168.124.212
-      ilo-password: admin
-      ilo-user: admin
+#    - id: compute2
+#      ip-addr: 192.168.124.111
+#      role: COMPUTE-ROLE
+#      server-group: RACK2
+#      nic-mapping: KVM
+#      mac-addr: "52:54:00:5d:4c:5e"
+##      ilo-ip: 192.168.124.212
+#      ilo-password: admin
+#      ilo-user: admin
 
