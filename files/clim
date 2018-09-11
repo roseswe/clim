@@ -30,6 +30,7 @@ COMMANDS
                                           - $def=~/openstack/my_cloud/definition
                                           - $data=~/openstack/my_cloud/definition/data
                                           - $scratch=~/scratch/ansible/next/ardana/ansible
+					  - $config=~/openstack/my_cloud/config
                                             to jump into the DATA directory of the input model, just run "cd $data"
 
 EOF
@@ -155,6 +156,7 @@ case "$1" in
 # added by clim
 export def=~/openstack/my_cloud/definition
 export data=~/openstack/my_cloud/definition/data
+export config=~/openstack/my_cloud/config
 export scratch=~/scratch/ansible/next/ardana/ansible 
 EOF
 	  ;;
