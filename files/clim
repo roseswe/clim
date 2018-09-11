@@ -26,7 +26,7 @@ COMMANDS
   service <OPENSTACK-SERVICE> <ACTION> : runs the ansible playbook to execute <ACTION> on the service <OPENSTACK>
                                          e.x.: "clim service neutron restart"
   service list                         : list all services
-  setup_basrc	                       : crates a .bashrc file and setup variables which can be used as a shortcut for jumping in the correct directory:
+  setup_bashrc	                       : crates a .bashrc file and setup variables which can be used as a shortcut for jumping in the correct directory:
                                           - $def=~/openstack/my_cloud/definition
                                           - $data=~/openstack/my_cloud/definition/data
                                           - $scratch=~/scratch/ansible/next/ardana/ansible
