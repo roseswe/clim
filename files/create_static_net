@@ -1,0 +1,38 @@
+#!/bin/bash
+# this script migrates the dhcp config to a static one and uses the dhcp info as base
+# call create_static_net <DEV>
+#  <DEV> dhcp network interface - default is eth0
+# get current ip address
+DEV=$1
+if [ -z $DEV ]
+   then
+    DEV="eth0"
+fi
+IP=`ip addr show dev $DEV | grep "inet " | awk '{ print $2 }'`
+if [ -z $IP ]
+   then
+    echo No IP address found
+    exit 1
+fi
+
+if [ -f  /etc/sysconfig/network/ifcfg-$DEV ]
+      then
+        mv /etc/sysconfig/network/ifcfg-$DEV /etc/sysconfig/network/ifcfg-${DEV}.save
+fi
+cat  <<EOF > /etc/sysconfig/network/ifcfg-$DEV
+BOOTPROTO='static'
+IPADDR='$IP'
+STARTMODE='auto'
+EOF
+
+### get default router
+
+ROUTER=`netstat -rn | grep ^0.0.0.0 | awk '{ print $2 }'`
+if [ -z $ROUTER ]
+      then
+         echo no default router found, skipping
+      else
+         echo "default $ROUTER - -" > /etc/sysconfig/network/routes
+fi
+echo created static ip config with IP: $IP
+
