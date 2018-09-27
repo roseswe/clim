@@ -135,7 +135,6 @@ case "$1" in
         
         prepare-sles-grub2)
               cd ~/openstack/ardana/ansible
-                        
               ansible-playbook -i hosts/localhost prepare-sles-grub2.yml
 	;;
         bm-reimage)
@@ -147,26 +146,32 @@ case "$1" in
 	      fi 
               ansible-playbook -i hosts/localhost bm-reimage.yml $nodes
 	 ;;
-         bm-power-status)
-              cd ~/openstack/ardana/ansible
-              nodes=""
-              if [ ! -z $2 ]
-                  then
-                   nodes="-e nodelist=$2"
+        nic_mapping)
+              if [ -z $2 ]
+                 then
+                   echo "clim nic_mapping <SERVERNAME>"
+                   exit 1
               fi
-              ansible-playbook -i hosts/localhost bm-power-status.yml $nodes |  grep -A 1000 ipmi_connectivity.power | grep -A 2 ^ok
-         ;;
-        wipe-disks)
-              cd ~/openstack/ardana/ansible
-              nodes=""
-              if [ ! -z $2 ]
-                  then
-                   nodes="-e nodelist=$2"
+              ping -c 1 $2 >>/dev/null
+              if [ $? -ne 0 ]
+		  then 
+                    echo ERROR: Server not online ...
+                    exit 1
               fi
-              ansible-playbook -i hosts/localhost bm-reimage.yml $nodes
-         ;;
+              echo "    - name: <CHANGE>"
+              echo "      physical-ports:"
+              for i in `ssh 192.168.124.101 "ls /sys/class/net/ -l | grep pci | cut -d / -f 6,8"`
+                 do 
+                  bus=`echo $i | cut -d / -f1`
+                  net=`echo $i | cut -d / -f 2`
+                  cat <<EOF
+        - logical-name: $net
+          type: simple-port
+          bus-address: "$bus"
 
-
+EOF
+              done
+          ;;
 
         test)
           echo Hallo
