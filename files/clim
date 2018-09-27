@@ -87,38 +87,52 @@ case "$1" in
 
 
         site)
+	  cd /var/lib/ardana//openstack/ardana/ansible
+          g_stat=`git status --porcelain`
+          if [ -n "$g_stat" ]
+                then
+                 echo "there are changes in the input model:"
+                 echo $g_stat
+                 echo "run \"prepare\" first"
+                 exit 2
+          fi
 	  cd ~/scratch/ansible/next/ardana/ansible
-          screen ansible-playbook -i hosts/verb_hosts site.yml
+          screen ansible-playbook -i hosts/verb_hosts site.yml $options
 	  ;;
 
         start)
           cd ~/scratch/ansible/next/ardana/ansible
-          ansible-playbook -i hosts/verb_hosts ardana-start.yml
+          ansible-playbook -i hosts/verb_hosts ardana-start.yml $options
           ;;
 
         stop)
           cd ~/scratch/ansible/next/ardana/ansible
-          ansible-playbook -i hosts/verb_hosts ardana-stop.yml
+          ansible-playbook -i hosts/verb_hosts ardana-stop.yml $options
           ;;
 
         status)
           cd ~/scratch/ansible/next/ardana/ansible
-          ansible-playbook -i hosts/verb_hosts ardana-status.yml
+          ansible-playbook -i hosts/verb_hosts ardana-status.yml $options
+          ;;
+
+        reboot)
+          cd ~/scratch/ansible/next/ardana/ansible
+          ansible-playbook -i hosts/verb_hosts ardana-reboot.yml $options
           ;;
 
         service)
-          if [ "$2" == "list" ]
+          if [ "$3" == "list" ]
 	       then
                echo "SERVICES:"
 	       cd  ~/scratch/ansible/next/ardana/ansible
                 ls *.yml | grep '^[a-z]' | grep "start\|stop\|restart\|status" | cut -d "-" -f 1 | sort -u
           else
-          if [ -z "$2" ] || [ -z "$3" ] 
+          if [ -z "$3" ] || [ -z "$2" ] 
 		then
-		 echo "clim service <SERVICENAME> <ACTION>"
+		 echo "clim service <ACTION> <SERVICE>"
 		 exit
           fi
-          acmd="${2}-${3}.yml"
+          acmd="${3}-${2}.yml"
           cd ~/scratch/ansible/next/ardana/ansible
           if [ ! -f /var/lib/ardana/scratch/ansible/next/ardana/ansible/$acmd ]
 	     then
@@ -134,8 +148,14 @@ case "$1" in
 	;;
         
         prepare-sles-grub2)
+              nodes=""
+              if [ ! -z $2 ]
+                  then
+                   nodes="-e nodelist=$2"
+	      fi 
               cd ~/openstack/ardana/ansible
-              ansible-playbook -i hosts/localhost prepare-sles-grub2.yml
+                        
+              ansible-playbook -i hosts/localhost prepare-sles-grub2.yml $nodes
 	;;
         bm-reimage)
 	      cd ~/openstack/ardana/ansible
@@ -146,6 +166,24 @@ case "$1" in
 	      fi 
               ansible-playbook -i hosts/localhost bm-reimage.yml $nodes
 	 ;;
+         bm-power-status)
+              cd ~/openstack/ardana/ansible
+              nodes=""
+              if [ ! -z $2 ]
+                  then
+                   nodes="-e nodelist=$2"
+              fi
+              ansible-playbook -i hosts/localhost bm-power-status.yml $nodes |  grep -A 1000 ipmi_connectivity.power | grep -A 2 ^ok
+         ;;
+        wipe-disks)
+              cd ~/scratch/ansible/next/ardana/ansible
+              nodes=""
+              if [ ! -z $2 ]
+                  then
+                   nodes="--limit $2"
+              fi
+              ansible-playbook -i hosts/localhost wipe_disks.yml $nodes
+         ;;
         nic_mapping)
               if [ -z $2 ]
                  then
@@ -160,7 +198,7 @@ case "$1" in
               fi
               echo "    - name: <CHANGE>"
               echo "      physical-ports:"
-              for i in `ssh 192.168.124.101 "ls /sys/class/net/ -l | grep pci | cut -d / -f 6,8"`
+              for i in `ssh $2 "ls /sys/class/net/ -l | grep pci | cut -d / -f 5,8"`
                  do 
                   bus=`echo $i | cut -d / -f1`
                   net=`echo $i | cut -d / -f 2`
@@ -173,8 +211,10 @@ EOF
               done
           ;;
 
+
+
         test)
-          echo Hallo
+          echo This is only a test...
           echo DEBUG: $options $2 $3
           ;;
 
