@@ -39,7 +39,7 @@ EOF
    v)
      verbose=1
    ;;
-   c) 
+   c)
      options="-e remove_deleted_servers=True -e free_unused_addresses=True"
    ;;
    o)
@@ -64,9 +64,9 @@ shift $(($OPTIND - 1))
 
 case "$1" in
 	prepare)
-	  cd /var/lib/ardana//openstack/ardana/ansible
+	  cd ~/openstack/ardana/ansible || exit
           if [ -z "$2" ]
-	     then 
+	     then
                echo "git commit message is missing: clim prepare \"MESSAGE\" "
                exit 3
           fi
@@ -87,7 +87,7 @@ case "$1" in
 
 
         site)
-	  cd /var/lib/ardana//openstack/ardana/ansible
+	  cd ~/openstack/ardana/ansible || exit
           g_stat=`git status --porcelain`
           if [ -n "$g_stat" ]
                 then
@@ -96,27 +96,27 @@ case "$1" in
                  echo "run \"prepare\" first"
                  exit 2
           fi
-	  cd ~/scratch/ansible/next/ardana/ansible
+	  cd ~/scratch/ansible/next/ardana/ansible || exit
           screen ansible-playbook -i hosts/verb_hosts site.yml $options
 	  ;;
 
         start)
-          cd ~/scratch/ansible/next/ardana/ansible
+          cd ~/scratch/ansible/next/ardana/ansible || exit
           ansible-playbook -i hosts/verb_hosts ardana-start.yml $options
           ;;
 
         stop)
-          cd ~/scratch/ansible/next/ardana/ansible
+          cd ~/scratch/ansible/next/ardana/ansible || exit
           ansible-playbook -i hosts/verb_hosts ardana-stop.yml $options
           ;;
 
         status)
-          cd ~/scratch/ansible/next/ardana/ansible
+          cd ~/scratch/ansible/next/ardana/ansible || exit
           ansible-playbook -i hosts/verb_hosts ardana-status.yml $options
           ;;
 
         reboot)
-          cd ~/scratch/ansible/next/ardana/ansible
+          cd ~/scratch/ansible/next/ardana/ansible || exit
           ansible-playbook -i hosts/verb_hosts ardana-reboot.yml $options
           ;;
 
@@ -124,16 +124,16 @@ case "$1" in
           if [ "$3" == "list" ]
 	       then
                echo "SERVICES:"
-	       cd  ~/scratch/ansible/next/ardana/ansible
+	       cd  ~/scratch/ansible/next/ardana/ansible || exit
                 ls *.yml | grep '^[a-z]' | grep "start\|stop\|restart\|status" | cut -d "-" -f 1 | sort -u
           else
-          if [ -z "$3" ] || [ -z "$2" ] 
+          if [ -z "$3" ] || [ -z "$2" ]
 		then
 		 echo "clim service <ACTION> <SERVICE>"
 		 exit
           fi
           acmd="${3}-${2}.yml"
-          cd ~/scratch/ansible/next/ardana/ansible
+          cd ~/scratch/ansible/next/ardana/ansible || exit
           if [ ! -f /var/lib/ardana/scratch/ansible/next/ardana/ansible/$acmd ]
 	     then
                echo "service and/or action not found - no valid ansible playbook found"
@@ -143,31 +143,31 @@ case "$1" in
           fi
           ;;
         cobbler-deploy)
-              cd ~/openstack/ardana/ansible
+              cd ~/openstack/ardana/ansible || exit
               ansible-playbook -i hosts/localhost cobbler-deploy.yml
 	;;
-        
+      
         prepare-sles-grub2)
               nodes=""
               if [ ! -z $2 ]
                   then
                    nodes="-e nodelist=$2"
-	      fi 
-              cd ~/openstack/ardana/ansible
-                        
+	      fi
+              cd ~/openstack/ardana/ansible || exit
+                       
               ansible-playbook -i hosts/localhost prepare-sles-grub2.yml $nodes
 	;;
         bm-reimage)
-	      cd ~/openstack/ardana/ansible
+	      cd ~/openstack/ardana/ansible || exit
               nodes=""
               if [ ! -z $2 ]
                   then
                    nodes="-e nodelist=$2"
-	      fi 
+	      fi
               ansible-playbook -i hosts/localhost bm-reimage.yml $nodes
 	 ;;
          bm-power-status)
-              cd ~/openstack/ardana/ansible
+              cd ~/openstack/ardana/ansible || exit
               nodes=""
               if [ ! -z $2 ]
                   then
@@ -176,7 +176,7 @@ case "$1" in
               ansible-playbook -i hosts/localhost bm-power-status.yml $nodes |  grep -A 1000 ipmi_connectivity.power | grep -A 2 ^ok
          ;;
         wipe-disks)
-              cd ~/scratch/ansible/next/ardana/ansible
+              cd ~/scratch/ansible/next/ardana/ansible || exit
               nodes=""
               if [ ! -z $2 ]
                   then
@@ -192,14 +192,14 @@ case "$1" in
               fi
               ping -c 1 $2 >>/dev/null
               if [ $? -ne 0 ]
-		  then 
+		  then
                     echo ERROR: Server not online ...
                     exit 1
               fi
               echo "    - name: <CHANGE>"
               echo "      physical-ports:"
               for i in `ssh $2 "ls /sys/class/net/ -l | grep pci | cut -d / -f 5,8"`
-                 do 
+                 do
                   bus=`echo $i | cut -d / -f1`
                   net=`echo $i | cut -d / -f 2`
                   cat <<EOF
@@ -228,7 +228,7 @@ export scratch=~/scratch/ansible/next/ardana/ansible
 EOF
 	  ;;
    	*)
-          echo $"Usage: $0 cd_myconfig " 
+          echo $"Usage: $0 cd_myconfig "
 	  exit 1
 esac
 if [ $notify -eq 1 ]
