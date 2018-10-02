@@ -6,6 +6,16 @@ options=""
 verbose=0
 notify=0
 
+#Set default varables
+ARDANA_USER="ardana"
+
+# Check if executed as ARDANA_USER, if not exit script
+if [[ "$(whoami)" != "$ARDANA_USER" ]]; then
+	printf "This script must be executed as user '$ARDANA_USER'\n" 1>&2
+	exit 1
+fi
+
+
 while getopts "ch?no:l:" opt; do
    case "$opt" in
    h|\?)
