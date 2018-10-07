@@ -7,7 +7,7 @@ verbose=0
 notify=0
 
 #Set default varables
-ARDANA_USER="ardana"
+[[ -z ${ARDANA_USER+x} ]] && ARDANA_USER="ardana"
 
 # Check if executed as ARDANA_USER, if not exit script
 if [[ "$(whoami)" != "$ARDANA_USER" ]]; then
@@ -37,11 +37,11 @@ COMMANDS
                                          e.x.: "clim service neutron restart"
   service list                         : list all services
   setup_bashrc	                       : crates a .bashrc file and setup variables which can be used as a shortcut for jumping in the correct directory:
-                                          - $def=~/openstack/my_cloud/definition
-                                          - $data=~/openstack/my_cloud/definition/data
-                                          - $scratch=~/scratch/ansible/next/ardana/ansible
-					  - $config=~/openstack/my_cloud/config
-                                            to jump into the DATA directory of the input model, just run "cd $data"
+                                          - \$def=~/openstack/my_cloud/definition
+                                          - \$data=~/openstack/my_cloud/definition/data
+                                          - \$scratch=~/scratch/ansible/next/ardana/ansible
+					  - \$config=~/openstack/my_cloud/config
+                                            to jump into the DATA directory of the input model, just run "cd \$data"
 
 EOF
      exit 0
