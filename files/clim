@@ -5,6 +5,18 @@ OPTINT=1
 options=""
 verbose=0
 notify=0
+function notify {
+if [ $notify -eq 1 ]
+        then
+         curl -s \
+  --form-string "token=$push_token" \
+  --form-string "user=$push_user" \
+  --form-string "message=$1" \
+  --form-string "device=$push_device" \
+  --form-string "title=$push_title" \
+   $push_URL >/dev/null
+fi
+}
 
 #Set default varables
 [[ -z ${ARDANA_USER+x} ]] && ARDANA_USER="ardana"
@@ -260,12 +272,14 @@ EOF
           if [ $? -ne 0 ]
                 then
                   echo "ERROR"
+                  notify "CLIM: update-pkgs failed"
                   exit 2
           fi
           ansible-playbook -i hosts/verb_hosts ardana-update.yml --limit $2
           if [ $? -ne 0 ]
                 then
                   echo "ERROR"
+                  notify "CLIM: ardana-update failed"
                   exit 2
           fi
           ansible-playbook -i hosts/verb_hosts ardana-update-status.yml --limit $2
@@ -290,16 +304,6 @@ EOF
           echo $"Usage: $0 cd_myconfig "
 	  exit 1
 esac
-if [ $notify -eq 1 ]
-	then
-         curl -s \
-  --form-string "token=$push_token" \
-  --form-string "user=$push_user" \
-  --form-string "message=$push_msg" \
-  --form-string "device=$push_device" \
-  --form-string "title=$push_title" \
-   $push_URL >/dev/null
-fi
-
+notify "CLIM has finieshd"
 
 
