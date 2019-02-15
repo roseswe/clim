@@ -27,42 +27,37 @@
         - AZ2
         - AZ3
       configuration-data:
-        - DESIGNATE-CONFIG-CP1
-        - OCTAVIA-CONFIG-CP1
         - NEUTRON-CONFIG-CP1
-        - SWIFT-CONFIG-CP1
       common-service-components:
-        - logging-rotate
-        - logging-producer
-        - monasca-agent
-        - freezer-agent
         - stunnel
         - lifecycle-manager-target
       clusters:
         - name: cluster1
           cluster-prefix: c1
           server-role: CONTROLLER-ROLE
-          member-count: 3
+          member-count: 1
           allocation-policy: strict
           service-components:
             - lifecycle-manager
             - tempest
             - ntp-server
-            - swift-ring-builder
             - mysql
             - ip-cluster
             - apache2
             - keystone-api
             - keystone-client
             - rabbitmq
-            - glance-api
+            - glance-api:
+                ha_mode: false
+                glance_stores: 'file'
+                glance_default_store: 'file'
             - glance-registry
             - glance-client
             - cinder-api
             - cinder-scheduler
             - cinder-volume
-            - cinder-backup
             - cinder-client
+            - cinder-backup
             - nova-api
             - nova-placement-api
             - nova-scheduler
@@ -77,52 +72,14 @@
             - neutron-metadata-agent
             - neutron-openvswitch-agent
             - neutron-client
-            - octavia-api
-            - octavia-health-manager
             - horizon
-            - swift-proxy
             - memcached
-            - swift-account
-            - swift-container
-            - swift-object
-            - swift-client
             - heat-api
             - heat-api-cfn
             - heat-api-cloudwatch
             - heat-engine
             - heat-client
             - openstack-client
-            - ceilometer-api
-            - ceilometer-polling
-            - ceilometer-agent-notification
-            - ceilometer-common
-            - ceilometer-client
-            - zookeeper
-            - kafka
-            - spark
-            - cassandra
-            - storm
-            - monasca-api
-            - monasca-persister
-            - monasca-notifier
-            - monasca-threshold
-            - monasca-client
-            - monasca-transform
-            - logging-server
-            - ops-console-web
-            - freezer-api
-            - barbican-api
-            - barbican-client
-            - barbican-worker
-            - designate-api
-            - designate-central
-            - designate-pool-manager
-            - designate-zone-manager
-            - designate-mdns
-            - designate-client
-            - bind
-            - magnum-api
-            - magnum-conductor
 
       resources:
         - name: compute

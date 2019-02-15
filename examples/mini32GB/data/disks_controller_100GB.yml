@@ -19,7 +19,7 @@
     version: 2
 
   disk-models:
-  - name: CONTROLLER-600GB-DISKS
+  - name: CONTROLLER-100GB-DISKS
 
     # This example is based on using a single 600GB disk for a volume
     # group that contains all file systems on a controller with 64GB
@@ -35,7 +35,7 @@
     #
 
     volume-groups:
-      - name: ardana-vg
+      - name: system
         physical-volumes:
 
           # NOTE: 'sda_root' is a templated value. This value is checked in
@@ -52,7 +52,7 @@
           # 5% should be left free for snapshots and to allow for some flexibility.
 
           - name: root
-            size: 10%
+            size: 20%
             fstype: ext4
             mount: /
 
@@ -76,7 +76,7 @@
           # is saved here.  Although the individual objects are small the
           # accumulated data can grow over time
           - name: mysql
-            size: 10%
+            size: 5%
             mount: /var/lib/mysql
             fstype: ext4
             mkfs-opts: -O large_file
@@ -87,7 +87,7 @@
           # messages to disc under high load. This area should evaluate to a value
           # that is slightly larger than the memory size of your server
           - name: rabbitmq
-            size: 4%
+            size: 5%
             mount: /var/lib/rabbitmq
             fstype: ext4
             mkfs-opts: -O large_file
@@ -97,49 +97,6 @@
 
           # Database storage for event monitoring (Monasca).  Events are generally
           # small data objects.
-          - name: cassandra_db
-            size: 13%
-            mount: /var/cassandra/data
-            fstype: ext4
-            mkfs-opts: -O large_file
-            consumer:
-              name: cassandra
-
-          - name: cassandra_log
-            size: 2%
-            mount: /var/cassandra/commitlog
-            fstype: ext4
-            mkfs-opts: -O large_file
-            consumer:
-              name: cassandra
-
-          # Messaging system for monitoring.
-          - name: kafka
-            size: 11%
-            mount: /var/kafka
-            fstype: ext4
-            mkfs-opts: -O large_file
-            consumer:
-              name: kafka
-
-          # Data storage for centralized logging. This holds log entries from all
-          # servers in the cloud and hence can require a lot of disk space.
-          - name: elasticsearch
-            size: 21%
-            mount: /var/lib/elasticsearch
-            fstype: ext4
-
-          # Zookeeper is used to provide cluster co-ordination in the monitoring
-          # system.  Although not a high user of disc space we have seen issues
-          # with zookeeper snapshots filling up filesystems so we keep it in its
-          # own space for stability.
-          - name: zookeeper
-            size: 1%
-            mount: /var/lib/zookeeper
-            fstype: ext4
-
-        consumer:
-           name: os
 
     # Cinder: cinder volume needs temporary local filesystem space to convert
     # images to raw when creating bootable volumes. Using a separate volume
@@ -187,18 +144,3 @@
     #        mkfs-opts: -O large_file
 
     # Additional disk group defined for Swift
-    device-groups:
-      - name: swiftobj
-        devices:
-          - name: /dev/sdb
-          - name: /dev/sdc
-          # Add any additional disks for swift here
-          # -name: /dev/sdd
-          # -name: /dev/sde
-        consumer:
-          name: swift
-          attrs:
-            rings:
-              - account
-              - container
-              - object-0

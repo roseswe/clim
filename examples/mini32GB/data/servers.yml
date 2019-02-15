@@ -22,7 +22,7 @@
     # NOTE: These values need to be changed to match your environment.
     # Define the network range that contains the ip-addr values for
     # the individual servers listed below.
-    subnet: 192.168.110.0
+    subnet: 192.168.124.0
     netmask: 255.255.255.0
 
   servers:
@@ -33,42 +33,55 @@
 
     # Controllers
     - id: controller1
-      ip-addr: 192.168.110.3
+      ip-addr: 192.168.124.101
       role: CONTROLLER-ROLE
       server-group: RACK1
-      nic-mapping: HP-DL360-4PORT
-      mac-addr: "b2:72:8d:ac:7c:6f"
-      ilo-ip: 192.168.109.3
-      ilo-password: password
+      nic-mapping: KVM
+      mac-addr: "52:54:00:a0:ab:d8"
+      ilo-ip: 192.168.124.210
+      ilo-password: admin
       ilo-user: admin
 
-    - id: controller2
-      ip-addr: 192.168.110.4
-      role: CONTROLLER-ROLE
-      server-group: RACK2
-      nic-mapping: HP-DL360-4PORT
-      mac-addr: "8a:8e:64:55:43:76"
-      ilo-ip: 192.168.109.4
-      ilo-password: password
-      ilo-user: admin
+#    - id: controller2
+#      ip-addr: 192.168.124.102
+#      role: CONTROLLER-ROLE
+#      server-group: RACK2
+#      nic-mapping: KVM
+#      mac-addr: "52:54:00:a0:ab:d8"
+#      ilo-ip: 192.168.124.210
+#      ilo-password: admin
+#      ilo-user: admin
+#
+#    - id: controller3
+#      ip-addr: 192.168.124.103
+#      role: CONTROLLER-ROLE
+#      server-group: RACK3
+#      nic-mapping: KVM
+#      mac-addr: "52:54:00:a0:ab:d8"
+#      ilo-ip: 192.168.124.210
+#      ilo-password: admin
+#      ilo-user: admin
 
-    - id: controller3
-      ip-addr: 192.168.110.5
-      role: CONTROLLER-ROLE
-      server-group: RACK3
-      nic-mapping: HP-DL360-4PORT
-      mac-addr: "26:67:3e:49:5a:a7"
-      ilo-ip: 192.168.109.5
-      ilo-password: password
-      ilo-user: admin
+
 
     # Compute Nodes
     - id: compute1
-      ip-addr: 192.168.110.6
+      ip-addr: 192.168.124.110
       role: COMPUTE-ROLE
       server-group: RACK1
-      nic-mapping: MY-2PORT-SERVER
-      mac-addr: "d6:70:c1:36:43:f7"
-      ilo-ip: 192.168.109.6
-      ilo-password: password
+      nic-mapping: KVM
+      mac-addr: "52:54:00:f3:3b:46"
+      ilo-ip: 192.168.124.211
+      ilo-password: admin
       ilo-user: admin
+
+#    - id: compute2
+#      ip-addr: 192.168.124.111
+#      role: COMPUTE-ROLE
+#      server-group: RACK2
+#      nic-mapping: KVM
+#      mac-addr: "52:54:00:5d:4c:5e"
+##      ilo-ip: 192.168.124.212
+#      ilo-password: admin
+#      ilo-user: admin
+

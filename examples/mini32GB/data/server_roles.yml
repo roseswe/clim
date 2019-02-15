@@ -22,7 +22,7 @@
 
     - name: CONTROLLER-ROLE
       interface-model: CONTROLLER-INTERFACES
-      disk-model: CONTROLLER-1TB-DISKS
+      disk-model: CONTROLLER-100GB-DISKS
 
     - name: COMPUTE-ROLE
       interface-model: COMPUTE-INTERFACES
